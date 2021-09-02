@@ -39,25 +39,25 @@ Follow the few steps to do it:
 
 The gitlab repository token can be created on the setting.
 
-![image](/images/blog/import-api-with-gitlab-private-repo-setting_access_token.jpg)
+![setting_access_token](/images/blog/import-api-with-gitlab-private-repo-setting_access_token.jpg)
 
 ### Create access token
 
 You must configure the token of the gitlab repository like this:
 
-![image](/images/blog/import-api-with-gitlab-private-repo-token.jpg)
+![token](/images/blog/import-api-with-gitlab-private-repo-token.jpg)
 
 ## Add token to microcks
 
 To add token to microcks your user must be administrator who permit acces to administration settings.
 
-![image](/images/blog/import-api-with-gitlab-private-repo-add_token_microcks.jpg)
+![add_token_microcks](/images/blog/import-api-with-gitlab-private-repo-add_token_microcks.jpg)
 
 ## Know project ID 
 
 You can find the id of your project on the home page of your repository on gitlab UI interface.
 
-![image](/images/blog/import-api-with-gitlab-private-repo-project_ID.jpg)
+![project_ID](/images/blog/import-api-with-gitlab-private-repo-project_ID.jpg)
 
 ## Make the api URL
 
@@ -65,17 +65,17 @@ The Api url to get a RAW file must look like this:
 
 https://<GITLAB_URL>/api/v4/projects/<ID_PROJECT>/repository/files/<PATH>%2F<FILE_NAME>/raw?ref=<PROJECT_BRANCH>
 
-If the file is in directory you need to encode the character '/' with %2 on the <PATH> string.
+If the file is in directory you need to encode the character '/' with %2F on the <PATH> string.
 
 ## Importation exemple
 
 ### Configure repository url
 
-![image](/images/blog/import-api-with-gitlab-private-repo-import_exemple.jpg)
+![import_exemple](/images/blog/import-api-with-gitlab-private-repo-import_exemple.jpg)
 
 ### Select Token
 
-![image](/images/blog/import-api-with-gitlab-private-repo-select_token.jpg)
+![select_token](/images/blog/import-api-with-gitlab-private-repo-select_token.jpg)
 
 ## Conclusion
 
