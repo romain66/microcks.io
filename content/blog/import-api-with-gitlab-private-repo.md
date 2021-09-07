@@ -11,73 +11,68 @@ authors:
 
 > tl;dr
 
-Microcks can import API esealy with a Git repository using. 
+Microcks can easily import OpenAPI files from a Gitlab repository. However, you need more configuration for a secured repository.
 
-But is not the same mean for a private gitlab repository if you are simple user.
+The OpenApi file must be retrieved by it's RAW URL : https://<your_gitlab_server>/<your_path_to_your_repo>/-/raw/<branch>/<file>. This URL could not be called with any type of Gitlab token.
 
-The token gives access only to Gitlab API and Git and do not give access to RAW url.
+The URL to use with an access token is : https://<your_gitlab_server>/api/v4/projects/<project_id>/repository/files/<your_path_to_your_repo>%2F<file>/raw?ref=<branch>
 
-This post will show you a mean to connect Microcks with Gitlab even if you are simple user.
+This post will explain how to generate this access token and how to connect Microcks to a secured Gitlab repository.
 
+Tested with Gitlab 13.x.
 ## Summary
 
-To connect Microcks with RAW format to gitlab even if your repository is private you must use the API.
+To allow Microcks to read a raw file from a secured Gitlab repository, you have to create an access token.
 
-Follow the few steps to do it:
+Follow those few steps to do so:
 
-1. Create a Repository token
-2. Add token to microcks
-3. Know the project ID
-4. Make the api URL (return a raw format)
-5. Importation exemple
+1. Create a repository access token
+2. Declare the access token to microcks
+3. Get the repository ID
+4. Get the OpenAPI file's RAW URL
+5. Importation example
 6. Conclusion
 
-## Create Repository token
+## Create a repository access token
 
+### Go to your Gitlab repository UI
 
-### Go to your gitlab repository
-
-The gitlab repository token can be created on the setting.
+You can create the gitlab repository access token by using the "Access Tokens" choice in the settings of your Gitlab repository.
 
 ![setting_access_token](/images/blog/import-api-with-gitlab-private-repo-setting_access_token.jpg)
 
-### Create access token
+### Create the access token
 
-You must configure the token of the gitlab repository like this:
+You have to configure the token of the gitlab repository like this:
 
 ![token](/images/blog/import-api-with-gitlab-private-repo-token.jpg)
 
-## Add token to microcks
+## Declare the access token to microcks
 
-To add token to microcks your user must be administrator who permit acces to administration settings.
+To add your access token to microcks, use an administrator account, which authorize the access to administration settings.
 
 ![add_token_microcks](/images/blog/import-api-with-gitlab-private-repo-add_token_microcks.jpg)
 
-## Know project ID 
+## Get the project ID
 
-You can find the id of your project on the home page of your repository on gitlab UI interface.
+You can find the project id on the home page of your repository on the Gitlab UI interface.
 
 ![project_ID](/images/blog/import-api-with-gitlab-private-repo-project_ID.jpg)
 
-## Make the api URL
+## Get the OpenAPI file's RAW URL
 
-The Api url to get a RAW file must look like this:
+The OpenAPI file's RAW URL looks like this:
 
 https://<GITLAB_URL>/api/v4/projects/<ID_PROJECT>/repository/files/<PATH>%2F<FILE_NAME>/raw?ref=<PROJECT_BRANCH>
 
-If the file is in directory you need to encode the character '/' with %2F on the <PATH> string.
+A file within a directory needs the character '/' to be encoded with '%2F' on the <PATH> string.
 
 ## Importation exemple
 
-### Configure repository url
+### Configure repository's url
 
 ![import_exemple](/images/blog/import-api-with-gitlab-private-repo-import_exemple.jpg)
 
 ### Select Token
 
 ![select_token](/images/blog/import-api-with-gitlab-private-repo-select_token.jpg)
-
-## Conclusion
-
-This workaround is working only with Gitlab if your user is not an admin user.
-
